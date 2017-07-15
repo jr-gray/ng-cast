@@ -1,8 +1,14 @@
 angular.module('video-player')
+
+.component('videoList', {
+	bindings: {
+		videos: '<',
+		onClick: '<'
+	},
+  templateUrl: 'src/templates/videoList.html',
+  controller: 'videoListController'
+})
+
 .controller('videoListController', function($scope) {
 	$scope.videos = window.exampleVideoData;
 })
-.component('videoList', {
-  templateUrl: 'src/templates/videoList.html',
-  conroller: 'videoListController'
-});
