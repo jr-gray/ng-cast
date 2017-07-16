@@ -1,19 +1,21 @@
 angular.module('video-player')
 
-.component('app', {
-  templateUrl: 'src/templates/app.html',
+.controller('AppCtrl', function(youTube) {
+
+  this.searchService = youTube;
+  this.searchResults = (data) => {
+    this.videos = data;
+    this.currentVideo = this.videos[0];
+  };
+
+  this.selectVideo = (video) => {
+    this.currentVideo = video;
+  };
+
+  youTube.search('javascript tutorial', this.searchResults);
 })
+.component('app', {
 
-.controller('AppController', AppController)
-
-function AppController() {
-	var vm = this;
-	vm.selectVideo = function(video) {
-		vm.currentVideo = video;
-	};
-	vm.searchResults = () => {};
-	vm.currentVideo = window.exampleVideoData[0];
-	vm.videos = window.exampleVideoData;
-}
-
-
+  controller: 'AppCtrl',
+  templateUrl: 'src/templates/app.html'
+  });
